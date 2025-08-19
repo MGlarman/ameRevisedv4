@@ -6,7 +6,7 @@ import DonateSection from "../components/DonateSection";
 import SectionDivider from "../components/SectionDivider";
 import SectionDivider2 from "../components/SectionDivider2";
 import NovelBanner from "../components/NovelBanner";
-import Bookshelf from "../components/Bookshelf";
+import Bookshelf from "../components/BookShelf";
 import Footer from "../components/Footer";
 import BlogSection from "../components/BlogSection";
 
@@ -25,7 +25,7 @@ export default function HomePage() {
           <NovelBanner />
 
           <h1 className="text-4xl font-bold text-[#8b5e3c] mt-10">📚 My Bookshelf</h1>
-          <BookShelf />
+          <Bookshelf />
         </div>
         <div className="w-6 sm:w-10 bg-[#8b5e3c] shadow-inner" />
       </div>
