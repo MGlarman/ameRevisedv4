@@ -1,8 +1,44 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import headerBg from "../assets/images/header_bg.JPG";
 
-export default function Navigation({ cartCount = 0, isLoggedIn = false, onLogout }) {
+// Typewriter-komponent
+function TypewriterText({ text = "A M E R E V I S E D", className, style }) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    let index = 0;
+
+    const typingInterval = setInterval(() => {
+      if (index < text.length) {
+        setDisplayedText((prev) => prev + text.charAt(index));
+        index++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 150);
+
+    const cursorInterval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 500);
+
+    return () => {
+      clearInterval(typingInterval);
+      clearInterval(cursorInterval);
+    };
+  }, [text]);
+
+  return (
+    <h1 className={className} style={style}>
+      {displayedText}
+      <span className="inline-block">{showCursor ? "|" : " "}</span>
+    </h1>
+  );
+}
+
+// Navigation-komponent
+export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -15,17 +51,16 @@ export default function Navigation({ cartCount = 0, isLoggedIn = false, onLogout
       }}
     >
       <div className="max-w-screen-xl mx-auto px-8 py-6 flex justify-between items-center relative">
-        {/* Logo + tagline */}
+        {/* Logo + tagline med typewriter */}
         <Link to="/" className="flex flex-col text-left">
-          <h1
-            className="text-3xl sm:text-5xl font-heading uppercase tracking-wider transition-colors duration-300"
+          <TypewriterText
+            text="A MEREVISED"
+            className="text-3xl sm:text-5xl font-heading tracking-wider transition-colors duration-300"
             style={{
               color: "#c99800",
               textShadow: "1px 1px 3px rgba(0,0,0,0.6)",
             }}
-          >
-            AmeRevised
-          </h1>
+          />
           <p
             className="text-base sm:text-lg italic tracking-wide"
             style={{
@@ -51,13 +86,8 @@ export default function Navigation({ cartCount = 0, isLoggedIn = false, onLogout
         </button>
 
         {/* Desktop-menu */}
-        <nav className="hidden sm:flex gap-8 items-center text-xl">
-          <NavLinks
-            cartCount={cartCount}
-            isLoggedIn={isLoggedIn}
-            onLogout={onLogout}
-            isMobile={false}
-          />
+        <nav className="hidden sm:flex gap-8 items-center text-xl relative -top-1">
+          <NavLinks isMobile={false} />
         </nav>
       </div>
 
@@ -65,12 +95,7 @@ export default function Navigation({ cartCount = 0, isLoggedIn = false, onLogout
       {isOpen && (
         <div className="sm:hidden bg-secondary border-t border-border px-6 py-4 w-full max-w-screen-xl mx-auto">
           <nav className="flex flex-col gap-2 text-lg">
-            <NavLinks
-              cartCount={cartCount}
-              isLoggedIn={isLoggedIn}
-              onLogout={onLogout}
-              isMobile={true}
-            />
+            <NavLinks isMobile={true} />
           </nav>
         </div>
       )}
@@ -78,7 +103,8 @@ export default function Navigation({ cartCount = 0, isLoggedIn = false, onLogout
   );
 }
 
-function NavLinks({ cartCount, isLoggedIn, onLogout, isMobile }) {
+// NavLinks komponent
+function NavLinks({ isMobile }) {
   const linkColor = "#cfa640";
   const shadow = "1px 1px 2px rgba(0,0,0,0.5)";
   const fontSize = isMobile ? "1.125rem" : "1.25rem";
@@ -97,45 +123,15 @@ function NavLinks({ cartCount, isLoggedIn, onLogout, isMobile }) {
 
   return (
     <>
-      <Link to="/" className={linkClasses} style={linkStyle}>Home</Link>
-      <Link to="/magazine-archive" className={linkClasses} style={linkStyle}>Arkiv</Link>
-
-      {!isLoggedIn && (
-        <>
-          <Link to="/login" className={linkClasses} style={linkStyle}>Login</Link>
-          <Link to="/register" className={linkClasses} style={linkStyle}>Opret</Link>
-        </>
-      )}
-
-      <Link
-        to="/cart"
-        className={`relative ${
-          isMobile
-            ? "block px-4 py-3 hover:bg-hover/10 hover:text-hover"
-            : "text-2xl hover:text-hover"
-        } transition-colors duration-300`}
-        style={linkStyle}
-        aria-label="Kurv"
-      >
-        🛒
-        {cartCount > 0 && (
-          <span className="absolute -top-2 -right-3 bg-red-600 text-white text-xs rounded-full px-1 font-bold">
-            {cartCount}
-          </span>
-        )}
+      <Link to="/" className={linkClasses} style={linkStyle}>
+        Home
       </Link>
-
-      {isLoggedIn && (
-        <button
-          onClick={onLogout}
-          className={`border border-border px-3 py-2 text-base transition-colors duration-300 font-semibold ${
-            isMobile ? "hover:bg-hover/10" : "hover:bg-hover/20"
-          }`}
-          style={linkStyle}
-        >
-          Log ud
-        </button>
-      )}
+      <Link to="/magazine-archive" className={linkClasses} style={linkStyle}>
+        Arkiv
+      </Link>
+      <Link to="/about" className={linkClasses} style={linkStyle}>
+        Om
+      </Link>
     </>
   );
 }
