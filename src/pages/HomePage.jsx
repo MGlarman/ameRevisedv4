@@ -20,12 +20,12 @@ export default function HomePage() {
           <HeroSection />
           <DonateSection />
           <SectionDivider />
-          <BlogSection /> {/* Kun én hardcoded post */}
+          <BlogSection />
           <SectionDivider2 />
           <NovelBanner />
 
           <h1 className="text-4xl font-bold text-[#8b5e3c] mt-10">📚 My Bookshelf</h1>
-          <Bookshelf />
+          <BookShelf />
         </div>
         <div className="w-6 sm:w-10 bg-[#8b5e3c] shadow-inner" />
       </div>
