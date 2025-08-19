@@ -8,6 +8,9 @@ import NovelBanner from "../components/NovelBanner";
 import SectionDivider from "../components/SectionDivider";
 import SectionDivider2 from "../components/SectionDivider2";
 
+// Define backend URL
+const API_URL = "https://ame-server-lcrm.onrender.com";
+
 // BlogSection med kommentarer
 function BlogSection({ isUserLoggedIn, currentUser }) {
   const [posts, setPosts] = useState([]);
@@ -18,7 +21,7 @@ function BlogSection({ isUserLoggedIn, currentUser }) {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch("http://localhost:5224/api/blog");
+        const res = await fetch(`${API_URL}/api/blog`);
         if (!res.ok) throw new Error("Failed to fetch posts");
         const data = await res.json();
         setPosts(data);
@@ -34,7 +37,7 @@ function BlogSection({ isUserLoggedIn, currentUser }) {
 
     const fetchComments = async (postId) => {
       try {
-        const res = await fetch(`http://localhost:5224/api/blog/${postId}/comments`);
+        const res = await fetch(`${API_URL}/api/blog/${postId}/comments`);
         if (!res.ok) throw new Error("Failed to fetch comments");
         const data = await res.json();
         setComments(prev => ({ ...prev, [postId]: data }));
@@ -55,7 +58,7 @@ function BlogSection({ isUserLoggedIn, currentUser }) {
     if (!content) return;
 
     try {
-      await fetch(`http://localhost:5224/api/blog/${postId}/comments`, {
+      await fetch(`${API_URL}/api/blog/${postId}/comments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -64,7 +67,7 @@ function BlogSection({ isUserLoggedIn, currentUser }) {
 
       setNewComments(prev => ({ ...prev, [postId]: "" }));
 
-      const res = await fetch(`http://localhost:5224/api/blog/${postId}/comments`);
+      const res = await fetch(`${API_URL}/api/blog/${postId}/comments`);
       const data = await res.json();
       setComments(prev => ({ ...prev, [postId]: data }));
     } catch (err) {
@@ -74,7 +77,7 @@ function BlogSection({ isUserLoggedIn, currentUser }) {
 
   const handleDeleteComment = async (postId, commentId) => {
     try {
-      await fetch(`http://localhost:5224/api/blog/${postId}/comments/${commentId}`, {
+      await fetch(`${API_URL}/api/blog/${postId}/comments/${commentId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -107,7 +110,6 @@ function BlogSection({ isUserLoggedIn, currentUser }) {
                 <p className="text-gray-600">{post.content}</p>
                 <p className="text-sm text-gray-400 mt-2">Af {post.author}</p>
 
-                {/* Kommentarer */}
                 <div className="mt-4">
                   <h4 className="font-semibold text-sm mb-1">Kommentarer:</h4>
                   <ul className="space-y-2">

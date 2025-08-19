@@ -7,12 +7,15 @@ export default function AdminLogin({ onLogin }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Use environment variable or fallback to Render URL
+  const API_URL = import.meta.env.VITE_API_URL || "https://ame-server-lcrm.onrender.com";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5224/api/admin/login", {
+      const res = await fetch(`${API_URL}/api/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
