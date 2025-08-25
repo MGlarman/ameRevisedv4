@@ -2,7 +2,7 @@
 export default function WelcomeSection() {
   return (
     <section className="bg-yellow-100 text-yellow-900 py-6 px-6 rounded-t-lg w-full max-w-[calc(100vw-4rem)] sm:max-w-[calc(100vw-8rem)] mx-auto text-center sm:text-left font-semibold shadow-md flex flex-col sm:flex-row items-center gap-4">
-      {/* SVG-ikon */}
+      {/* SVG Icon */}
       <div className="flex-shrink-0">
         <svg
           className="w-10 h-10 text-yellow-700"
@@ -13,12 +13,12 @@ export default function WelcomeSection() {
         </svg>
       </div>
 
-      {/* Tekst */}
+      {/* Text */}
       <p className="text-lg sm:text-xl">
-        Velkommen til AmeRevised! Dette er hjem for mit magasin, the Strange Encounters Magazine. Derudover finder du her spændende bøger, reviews og inspiration.
-        <br></br>
-        <br></br>
-        Lad os sammen begynde på en rejse igennem litteraturens verden.
+        Welcome to AmeRevised! This is the home of my magazine, the Strange Encounters Magazine. Here, you will also find exciting books, reviews, and inspiration.
+        <br />
+        <br />
+        Let’s embark on a journey through the world of literature together.
       </p>
     </section>
   );

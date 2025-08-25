@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import headerBg from "../assets/images/header_bg.JPG";
 
-// Typewriter-komponent
+// Typewriter component
 function TypewriterText({ text = "A M E R E V I S E D", className, style }) {
   const [displayedText, setDisplayedText] = useState("");
   const [showCursor, setShowCursor] = useState(true);
@@ -37,7 +37,7 @@ function TypewriterText({ text = "A M E R E V I S E D", className, style }) {
   );
 }
 
-// Navigation-komponent
+// Navigation component
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -51,7 +51,7 @@ export default function Navigation() {
       }}
     >
       <div className="max-w-screen-xl mx-auto px-8 py-6 flex justify-between items-center relative">
-        {/* Logo + tagline med typewriter */}
+        {/* Logo + tagline with typewriter effect */}
         <Link to="/" className="flex flex-col text-left">
           <TypewriterText
             text="A MEREVISED"
@@ -72,7 +72,7 @@ export default function Navigation() {
           </p>
         </Link>
 
-        {/* Hamburger-menu (kun mobil) */}
+        {/* Hamburger menu (mobile only) */}
         <button
           className="sm:hidden text-3xl w-12 h-12 flex items-center justify-center absolute right-8 top-1/2 transform -translate-y-1/2 bg-transparent border-none"
           onClick={() => setIsOpen(!isOpen)}
@@ -85,13 +85,13 @@ export default function Navigation() {
           ☰
         </button>
 
-        {/* Desktop-menu */}
+        {/* Desktop menu */}
         <nav className="hidden sm:flex gap-8 items-center text-xl relative -top-1">
           <NavLinks isMobile={false} />
         </nav>
       </div>
 
-      {/* Mobil-menu */}
+      {/* Mobile menu */}
       {isOpen && (
         <div className="sm:hidden bg-secondary border-t border-border px-6 py-4 w-full max-w-screen-xl mx-auto">
           <nav className="flex flex-col gap-2 text-lg">
@@ -103,7 +103,7 @@ export default function Navigation() {
   );
 }
 
-// NavLinks komponent
+// NavLinks component
 function NavLinks({ isMobile }) {
   const linkColor = "#cfa640";
   const shadow = "1px 1px 2px rgba(0,0,0,0.5)";
@@ -127,10 +127,10 @@ function NavLinks({ isMobile }) {
         Home
       </Link>
       <Link to="/magazine-archive" className={linkClasses} style={linkStyle}>
-        Arkiv
+        Archive
       </Link>
       <Link to="/about" className={linkClasses} style={linkStyle}>
-        Om
+        About
       </Link>
     </>
   );

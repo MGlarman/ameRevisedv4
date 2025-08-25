@@ -2,7 +2,7 @@
 export default function DonateSection() {
   return (
     <section className="bg-[#8b5e3c] text-white py-6 px-6 text-center rounded-b-lg shadow-md mx-auto w-full max-w-[calc(100vw-4rem)] sm:max-w-[calc(100vw-8rem)] flex flex-col items-center gap-3">
-      {/* SVG-ikon */}
+      {/* SVG Icon */}
       <div className="flex-shrink-0">
         <svg
           className="w-8 h-8 text-yellow-400"
@@ -14,10 +14,10 @@ export default function DonateSection() {
       </div>
 
       <h3 className="text-xl font-semibold mb-1">
-        Støt mit arbejde
+        Support My Work
       </h3>
       <p className="mb-4 max-w-xl">
-        Hvis du synes om siden, kan du støtte mig økonomisk, så jeg kan fortsætte med at dele gode bøger og inspiration.
+        If you enjoy this site, you can support me with a cup of coffee, so I can continue sharing great books and inspiration.
       </p>
       <button className="bg-yellow-400 hover:bg-yellow-300 text-[#8b5e3c] font-bold py-2 px-5 rounded-md transition">
         Donate
