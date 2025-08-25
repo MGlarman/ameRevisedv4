@@ -13,9 +13,11 @@ import BlogSection from "../components/BlogSection";
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#f9f5ec]">
+      {/* Øverste indhold */}
       <div className="flex flex-1">
-        <div className="w-6 sm:w-10 bg-[#8b5e3c] shadow-inner" />
-        <div className="flex-1 px-6 sm:px-2 flex flex-col items-center py-2">
+        {/* Sidebjælke: næsten usynlig på mobil */}
+        <div className="w-1 sm:w-4 md:w-6 lg:w-10 bg-[#8b5e3c] shadow-inner" />
+        <div className="flex-1 px-2 sm:px-4 md:px-6 flex flex-col items-center py-2">
           <WelcomeSection />
           <HeroSection />
           <DonateSection />
@@ -27,15 +29,16 @@ export default function HomePage() {
           <h1 className="text-4xl font-bold text-[#8b5e3c] mt-10">📚 My Bookshelf</h1>
           <Bookshelf />
         </div>
-        <div className="w-6 sm:w-10 bg-[#8b5e3c] shadow-inner" />
+        <div className="w-1 sm:w-4 md:w-6 lg:w-10 bg-[#8b5e3c] shadow-inner" />
       </div>
 
+      {/* Footer */}
       <div className="flex">
-        <div className="w-6 sm:w-10 bg-[#8b5e3c] shadow-inner" />
-        <div className="flex-1 px-6 sm:px-0">
+        <div className="w-1 sm:w-4 md:w-6 lg:w-10 bg-[#8b5e3c] shadow-inner" />
+        <div className="flex-1 px-2 sm:px-4 md:px-6">
           <Footer />
         </div>
-        <div className="w-6 sm:w-10 bg-[#8b5e3c] shadow-inner" />
+        <div className="w-1 sm:w-4 md:w-6 lg:w-10 bg-[#8b5e3c] shadow-inner" />
       </div>
     </div>
   );

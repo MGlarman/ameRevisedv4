@@ -100,6 +100,12 @@ function initMagazineViewer(fileUrl, container) {
 
   window.addEventListener("resize", renderPages);
 
+  const clearAllPages = () => {
+    leftPage.innerHTML = "";
+    rightPage.innerHTML = "";
+    singlePage.innerHTML = "";
+  };
+
   pdfjsLib.getDocument(fileUrl).promise
     .then((pdf) => { pdfDoc = pdf; renderPages(); })
     .catch((err) => alert("Fejl ved indlæsning af PDF: " + err.message));
@@ -140,6 +146,8 @@ function initMagazineViewer(fileUrl, container) {
   function renderPages() {
     if (!pdfDoc) return;
 
+    clearAllPages(); // 🔹 ryd alle canvas først
+
     const N = pdfDoc.numPages;
 
     if (isMobile()) {
@@ -169,20 +177,21 @@ function initMagazineViewer(fileUrl, container) {
   }
 
   function renderPage(pageNum, container, fixedScale) {
-    container.innerHTML = "";
     if (!pageNum || !pdfDoc || pageNum > pdfDoc.numPages) return;
+
+    const canvas = document.createElement("canvas");
+    container.appendChild(canvas);
+    const ctx = canvas.getContext("2d");
 
     pdfDoc.getPage(pageNum).then((page) => {
       const viewport = page.getViewport({ scale: 1 });
       const scale = fixedScale || getScale(viewport.width);
       const scaledViewport = page.getViewport({ scale });
-      const canvas = document.createElement("canvas");
+
       canvas.width = scaledViewport.width;
       canvas.height = scaledViewport.height;
-      const ctx = canvas.getContext("2d");
 
       page.render({ canvasContext: ctx, viewport: scaledViewport }).promise.then(() => {
-        container.appendChild(canvas);
         canvas.style.maxWidth = "100%";
         canvas.style.height = "auto";
         canvas.style.display = "block";
